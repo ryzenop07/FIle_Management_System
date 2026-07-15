@@ -1,0 +1,96 @@
+{% extends 'admin/adminlayout.html' %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  </head>
+
+  <body>
+
+  {% block admin %} 
+ 
+  <form method="post" action="{% url 'dep_save' %}">
+    {% csrf_token %}
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>Add Department</h4>
+            <p>Lorem ipsum dolor sit amet.</p>
+
+    {% for i in messages %}
+        <div class="alert alert-success">
+            {{ i }}
+   
+        </div>
+    {% endfor %}
+
+
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-6">
+            <p>Department Name</p>
+            <input type="text" class="form-control" name="department_name">
+        </div>
+        <div class="col-sm-6">
+            <p>Department Code</p>
+            <input type="number" id="" class="form-control" name="department_code">
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-6">
+            <p>Department Head</p>
+            <input type="text" class="form-control" name="department_head">
+        </div>
+        <div class="col-sm-6">
+            <p>Status</p>
+          
+           <select class="form-control" name="status">
+    <option value="Active">Active</option>
+    <option value="UnActive">UnActive</option>
+</select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <p>Department Email</p>
+            <input type="email" class="form-control" name="department_email">
+        </div>
+        <div class="col-sm-6">
+            <p>Contact Number</p>
+            <input type="tel"  id="" class="form-control" name="department_number">
+        </div>
+    </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <button class="btn btn-primary bg-dark mt-3">clear</button>
+                <button class="btn btn-secondary bg-success border-0 mt-3">Submit</button>
+            </div>
+        </div>
+
+
+
+
+
+
+
+</div>
+</form>
+{% endblock %}
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  </body>
+</html>
