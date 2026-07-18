@@ -1,0 +1,164 @@
+{% extends 'admin/adminlayout.html' %}
+{% block admin %}
+<style>
+
+.section-card{
+    background:#fff;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.section-title{
+    font-size:28px;
+    font-weight:700;
+}
+
+.form-label {
+    font-weight: 800;
+}
+
+.form-control, .form-select {
+    height: 54px;
+    border-radius: 12px;
+    background: #f8fbff;
+    border: 1px solid #d6e0f5;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+
+
+
+
+</style>
+
+<div>
+    <h4 style="font-weight: 900;">Create File</h4>
+</div>
+
+<div>
+    <p>Upload/update file and assign it to another employee</p>
+</div>
+
+
+<div class="section-card">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="section-title mb-0">File Information</h4>
+        </div>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+         <div class="row">
+           <div class="col-lg-6 mb-4">
+            <label class="form-label">File No</label>
+            <input type="text" name="file_no" class="form-control" value placeholder="Auto generate if blank">
+           </div>
+            <div class="col-sm-6">
+                 <label class="form-label">Subject</label>
+            <input type="text" name="subject" class="form-control" value placeholder="Auto generate if blank">
+            </div>
+         </div>
+
+         <div class="row">
+           <div class="col-lg-6 mb-4">
+            <label class="form-label">Priority</label>
+            <select name="priority" class="form-select">
+              <option value="">-- Select Priority --</option>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+           </div>
+
+            <div class="col-sm-6">
+              <label class="form-label">Department</label>
+              <select name="department" class="form-select">
+
+
+
+
+                <option value="">-- Select Department --</option>
+
+              {% for i in dp %}
+<option value="{{i.department_name}}">{{i.department_name}}</option>
+{% endfor %}
+              </select>
+            </div>
+         </div>
+
+
+
+         <div class="row">
+           <div class="col-lg-6 mb-4">
+            <label class="form-label">Current User</label>
+
+            <select name="current_user" class="form-select">
+              <option value="">-- Select User --</option>
+             
+              {% for i in em %}
+<option value="{{i.username}}">{{i.username}}</option>
+{% endfor %}
+            </select>
+           </div>
+            <div class="col-sm-6">
+          <label class="form-label">Attachment</label>
+           <input type="file" name="file" class="form-control" value placeholder="Auto generate if blank">
+            </div>
+         </div>
+
+         <div class="row">
+            <div class="col-sm-12">
+                <label class="form-label">Descriptions</label>
+                <textarea name="description" id="" class="form-control"></textarea>
+
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-sm-12">
+                <label class="form-label">Remark</label>
+
+                <textarea name="description" id="" class="form-control" ></textarea>
+
+            </div>
+         </div>
+
+         <div class="row mt-3">
+            <div class="col-sm-12">
+                <button type="submit" class="btn btn-primary">Save File</button>
+                <a href="/" class="btn btn-dark">back</a>
+            </div>
+         </div>
+
+
+
+        </form>
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

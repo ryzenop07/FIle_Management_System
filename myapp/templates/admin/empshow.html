@@ -1,0 +1,63 @@
+{% extends 'admin/adminlayout.html' %}
+{% block admin %}
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Employye show</h3>
+                <p>Lorem ipsum dolor sit.</p>
+            </div>
+        </div>
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>username</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Employye id</th>
+                  
+                    <th>Department</th>
+<th>Designation</th>
+<th>Role</th>
+<th>Status</th>
+                   
+                    
+                    <th>Photo</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in ab %}
+                <tr>
+                    <td>{{i.name}}</td>
+                    <td>{{i.username}}</td>
+                    <td>{{i.email}}</td>
+                    <td>{{i.mobile}}</td>
+                    <td>{{i.emp_id}}</td>
+                    <td>{{i.department}}</td>
+                    <td>{{i.designation}}</td>
+                    <td>{{i.role}}</td>
+                    <td>{{i.status}}</td>
+                   
+                    <td> <img src="{{ i.photo.url }}" width="80" height="80"></td>
+                    <td>{{i.address}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock %}

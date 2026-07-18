@@ -11,8 +11,7 @@
 
       * { 
         margin: 0; 
-        box-sizing: 
-        border-box; 
+        box-sizing: border-box;
         font-family: 'Poppins', sans-serif; 
     }
      
@@ -35,7 +34,7 @@
         
       }
       .box1 {
-        background: linear-gradient(135deg, #1d4ed8, #102f76);
+            background: linear-gradient(135deg, #08703a, #034a24);
         padding: 24px 20px;
         color: #fff;
       }
@@ -92,7 +91,7 @@
       }
 
       .top {
-        background: linear-gradient(135deg, #1d4ed8, #102f76);
+       background: linear-gradient(135deg, #08703a, #034a24);
         padding: 16px 24px;
         color: white;
         flex-shrink: 0;
@@ -149,46 +148,38 @@
     <div class="sidebar">
       <div class="box1">
         <img src="https://gglengage.com/images/ggllogo.png" alt="">
-        <h5>GGL Admin</h5>
-        <small>Administration Dashboard</small>
+        <h5>GGL User</h5>
+        <small>File Tracking Dashboard</small>
       </div>
       <div class="box2">
         <div class="menu-title">Main</div>
-        <a href="{% url 'dashboard' %}"><i class="fa-solid fa-gauge-high"></i> Admin Dashboard</a>
+        <a href="{% url 'dashboard' %}"><i class="fa-solid fa-gauge-high"></i> User Dashboard </a>
 
         <div class="menu-title">File Management</div>
-        <a href="{% url 'createfile' %}">
+        <a href="">
             <i class="fa-solid fa-file-circle-plus"></i>
-             Create File
-            </a>
-        <a href="{% url 'recievedfile' %}">
-            <i class="fa-solid fa-file-circle-plus"></i>
-             Recived File
+             Upload File
             </a>
         <a href="">
             <i class="fa-solid fa-paper-plane"></i> 
-            Sent File</a>
+            Recived File</a>
         <a href="">
             <i class="fa-solid fa-clock"></i> 
-            Pending File</a>
+            Sent File</a>
         <a href="">
             <i class="fa-solid fa-folder-open"></i> 
-            All File</a>
-       
+           Pending File</a>
+        <a href="">
+            <i class="fa-solid fa-route"></i> 
+            File Track</a>
+        <a href="">
+            <i class="fa-solid fa-route"></i> 
+            My All Files </a>
+        <a href="">
+            <i class="fa-solid fa-route"></i> 
+            File Track</a>
 
-        <div class="menu-title">Administration</div>
-        <a href="{% url 'empadd' %}">
-            <i class="fa-solid fa-user-plus"></i> 
-            Add Employee</a>
-        <a href="{% url 'empshow' %}">
-            <i class="fa-solid fa-users"></i>
-            Manage Employee</a>
-        <a href="{% url 'adddep' %}">
-            <i class="fa-solid fa-building-circle-check"></i> 
-            Add Department</a>
-        <a href="{% url 'depshow' %}">
-            <i class="fa-solid fa-building"></i> 
-            Manage Department</a>
+    
 
         <div class="menu-title">Account</div>
         <a href="{% url 'logout' %}">
@@ -201,18 +192,18 @@
     <!-- MAIN CONTENT -->
     <div class="main-content">
       <div class="top d-flex align-items-center">
-        <h4>Admin Panel</h4>
+        <h4>User Panel</h4>
         <div class="ms-auto d-flex align-items-center gap-3">
           <div class="text-end">
-            <div style="color: #bfdbfe; font-weight: 900;">GGL Head Office</div>
-            <small>Administration</small>
+            <div style="color: #bfdbfe; font-weight: 900;">User</div>
+            <small>File User</small>
           </div>
           <div class="avatar">G</div>
         </div>
       </div>
 
       <div class="content-area">
-        {% block admin %}
+        {% block user %}
         {% endblock %}
       </div>
     </div>

@@ -26,7 +26,6 @@
 
       body{
         min-height: 100vh;
-        overflow: hidden;
          background:
           linear-gradient(rgba(3, 53, 31, 0.92), rgba(1, 32, 21, 0.96)),
           url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80");
@@ -35,9 +34,10 @@
         background-position: center;
         background-repeat: no-repeat;
 
+        display: flex;
         align-items: center;
         justify-content: center;
-         padding: 90px 24px;
+        padding: 40px 24px;
 
       }
 
@@ -52,6 +52,7 @@
          border-top: 5px solid #0b7a3b;
          display: grid;
          grid-template-columns: 1fr 1fr;
+         
 
        }
 
@@ -102,12 +103,13 @@ h1{
 }
 
 .three{
+    display: flex;
     align-items: center;
-     margin-top: 16px;
-     font-size: 15px;
-     font-weight: 700;
-     position: relative;
-
+    gap: 12px;
+    margin-top: 16px;
+    font-size: 15px;
+    font-weight: 700;
+    position: relative;
 }
 
 .three i{
@@ -175,8 +177,20 @@ h1{
     background: #f8fbf9;
     padding: 20px;
     display: block;
-
+    margin-bottom: 16px;
+    transition: 0.25s ease;
 }
+
+
+ .login-card:hover {
+        transform: translateY(-4px);
+
+        box-shadow: 0 15px 32px rgba(8, 112, 58, 0.16);
+
+        border-color: #08703a;
+
+        background: #ffffff;
+      }
 
 .login-card i{
     height: 50px;
@@ -213,6 +227,30 @@ h1{
 }
 
 
+
+      @media (max-width: 800px) {
+        body {
+          padding: 45px 18px;
+        }
+
+        .box {
+          grid-template-columns: 1fr;
+        }
+
+        .left,
+        .right {
+          min-height: auto;
+
+          padding: 32px 22px;
+        }
+
+        h1,
+        .right h2 {
+          font-size: 26px;
+        }
+      }
+
+
     </style>
   </head>
   <body>
@@ -236,11 +274,11 @@ h1{
         </div>
         <div class="three">
               <i class="fa-solid fa-route"></i>
-             <span>Secure File Management</span>
+             <span>Real-time File Tracking</span>
         </div>
         <div class="three">
-             <i class="fa-solid fa-file-shield"></i>
-             <span>Secure File Management</span>
+             <i class="fa-solid fa-check-circle"></i>
+             <span>Department Approvals</span>
         </div>
 
 
@@ -264,14 +302,14 @@ h1{
      <h2>Official Portal</h2>
      <p>Please select your login type to continue.</p>
 
-<a href="" class="login-card">
+<a href="{% url 'adminlogin' %}" class="login-card">
     <i class="fa-solid fa-user admin-icon"></i>
-     <h4>User Login</h4>
+     <h4>Admin Login</h4>
 
             <p> Upload, update, move and track your files. </p>
 </a>
 
-          <a href="" class="login-card">
+          <a href="{% url 'userlogin' %}" class="login-card">
             <i class="fa-solid fa-user user-icon"></i>
 
             <h4>User Login</h4>

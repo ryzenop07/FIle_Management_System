@@ -10,7 +10,13 @@ urlpatterns = [
     path('logout',logout,name='logout'),
     path('adddep',adddep,name='adddep'),
     path('dep_save',dep_save,name='dep_save'),
-    path('depshow',depshow,name='depshow')
-    
-   
+    path('depshow',depshow,name='depshow'),
+    path('userlogin',Userlogin,name='userlogin'),
+    path('userlogcode',userlogcode,name='userlogcode'),
+    path('empadd',empadd,name='empadd'),
+    path('empshow',empshow,name='empshow'),
+    path('userdashboard', userdashboard, name='userdashboard'),
+    path('userlayout',userlayout,name='userlayout'),
+    path('createfile', createfile, name='createfile'),
+    path('recievedfile', recievedfile, name='recievedfile'),
 ]

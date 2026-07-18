@@ -3,3 +3,6 @@ from .models import *
 
 # Register your models here.
 admin.site.register(adminlogin)
+admin.site.register(adddepartment)
+admin.site.register(Empadd)
+admin.site.register(Fileupload)

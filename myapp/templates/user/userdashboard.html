@@ -1,8 +1,8 @@
-{% extends 'admin/adminlayout.html' %}
-{% block admin %}
+{% extends 'user/userlayout.html' %}
+{% block user %}
 <style>
 .welcome{
-    background: linear-gradient(135deg, #1d4ed8, #102f76);
+    background: linear-gradient(135deg, #08703a, #034a24);
     border-radius: 20px;
     padding: 28px;
     color: #fff;
@@ -31,7 +31,7 @@
     height:60px;
     border-radius:15px;
     background:#eef4ff;
-    color:#1d4ed8;
+    color:green;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -92,7 +92,7 @@
 }
 
 .btn-main{
-    background:#2450d3;
+    background:green;
     color:#fff;
     padding:10px 20px;
     border-radius:8px;
@@ -102,12 +102,12 @@
 
 .btn-main:hover{
     color:#fff;
-    background:#1c3fb0;
+    background:green;
 }
 
 .table th{
     background:#eef3ff;
-    color:#2450d3;
+    color:green;
     padding:15px;
 }
 
@@ -118,7 +118,7 @@
 
 .badge-status{
     background:#e8efff;
-    color:#2450d3;
+    color:green;
     padding:6px 15px;
     border-radius:20px;
     font-size:13px;
@@ -132,6 +132,19 @@
 
 
 </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -220,10 +233,6 @@
 
         </div>
   </div>
-
-
-
-
 
 
 {% endblock %}
