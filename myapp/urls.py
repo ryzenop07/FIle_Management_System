@@ -19,4 +19,6 @@ urlpatterns = [
     path('userlayout',userlayout,name='userlayout'),
     path('createfile', createfile, name='createfile'),
     path('recievedfile', recievedfile, name='recievedfile'),
+    path('us_createfile', us_createfile, name='us_createfile'),
+    path('us_recievedfile', us_recievedfile, name='us_recievedfile'),
 ]

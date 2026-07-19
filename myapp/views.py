@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from .models import *
 from django.contrib import messages
 from datetime import datetime
+from django.db.models import Q
 
 
 # Create your views here.
@@ -63,8 +64,8 @@ def empadd(request):
     else:
         if request.method == "POST":
             
-            
             Empadd.objects.create(
+                
                 name=request.POST.get('name'),
                 username=request.POST.get('username'),
                 email=request.POST.get('email'),
@@ -78,8 +79,9 @@ def empadd(request):
                 photo=request.FILES.get('photo'),
                 address=request.POST.get('address'),
             )
-            return redirect('home')
-    return render(request, 'admin/empadd.html')
+            return redirect('empshow')
+        ab = adddepartment.objects.all()
+        return render(request, 'admin/empadd.html', {'ab': ab})
 
 def empshow(request):
     ab=Empadd.objects.all()
@@ -90,8 +92,6 @@ def userdashboard(request):
     return render(request,'user/userdashboard.html')
 
 
-def recievedfile(request):
-    return render(request, 'admin/recievedfile.html')
 
 def Userlogin(request):
     return render(request,'user/userlogin.html')
@@ -105,9 +105,9 @@ def userlogcode(request):
         if user:       
             if user.role=="User" and user.status=="Active":
                 request.session['userid']=username
-                return redirect('home')
-            else:
                 return redirect('userdashboard')
+            else:
+                return redirect('home')
             
     return redirect('userlogin')
 
@@ -116,7 +116,7 @@ def userlayout(request):
     return render(request, 'user/userlayout.html')
 
 def createfile(request):
-    userid=request.session.get('userid')
+    userid=request.session.get('adminid')
     dp=adddepartment.objects.all()
     em=Empadd.objects.all()
     
@@ -141,3 +141,47 @@ def createfile(request):
     }
     return render(request,'admin/createfile.html',con)
 
+def recievedfile(request):
+    sid=request.session.get('adminid')
+    ab=Fileupload.objects.filter(
+        Q(create_user=sid) | Q(current_user=sid)
+    )
+    return render(request, 'admin/recievedfile.html',{'ab':ab})
+
+
+
+
+def us_createfile(request):
+    userid=request.session.get('userid')
+    dp=adddepartment.objects.all()
+    em=Empadd.objects.all()
+    
+    if request.method=="POST":
+        Fileupload.objects.create(
+            file_no=request.POST.get('file_no'),
+            subject=request.POST.get('subject'),
+            create_user=userid,
+            priority=request.POST.get('priority'),
+            department=request.POST.get('department'),
+            current_user=request.POST.get('current_user'),
+            file=request.FILES.get('file'),
+            description=request.POST.get('description'),
+            create_at=datetime.now(),
+            status="Forwarded"
+        )
+        return redirect('us_createfile')
+    
+    con={
+        'dp':dp,
+        'em':em
+    }
+    return render(request,'user/us_createfile.html',con)
+
+
+    
+def us_recievedfile(request):
+    sid=request.session.get('userid')
+    ab=Fileupload.objects.filter(
+        Q(create_user=sid) | Q(current_user=sid)
+    )
+    return render(request, 'user/us_recievedfile.html',{'ab':ab})

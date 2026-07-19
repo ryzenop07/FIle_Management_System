@@ -12,18 +12,32 @@
 </div>
 
 
-<table>
+<table class="table table-bordered">
     <thead>
         <tr>
             <th>File No</th>
             <th>Subject</th>
+            <th>Create User</th>
             <th>Attachment</th>
             <th>Current User</th>
             <th>Status</th>
             <th>Date</th>
         </tr>
     </thead>
-    <tbody></tbody>
+    <tbody>
+        {% for i in ab %}
+        <tr>
+            <td>{{i.file_no}}</td>
+            <td>{{i.subject}}</td>
+            <td>{{i.create_user}}</td>
+            <td>{{i.file}}</td>
+            <td>{{i.current_user}}</td>
+            <td>{{i.status}}</td>
+            <td>{{i.create_at}}</td>
+           
+        </tr>
+        {% endfor %}
+    </tbody>
 </table>
 
 
