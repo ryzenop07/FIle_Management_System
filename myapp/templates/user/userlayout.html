@@ -163,26 +163,21 @@
         <a href="{% url 'us_recievedfile' %}">
             <i class="fa-solid fa-paper-plane"></i> 
             Recived File</a>
-        <a href="">
+        <a href="{% url 'us_sentfile' %}">
             <i class="fa-solid fa-clock"></i> 
             Sent File</a>
         <a href="">
             <i class="fa-solid fa-folder-open"></i> 
            Pending File</a>
-        <a href="">
-            <i class="fa-solid fa-route"></i> 
-            File Track</a>
-        <a href="">
+       
+        <a href="{% url 'us_allfile' %}">
             <i class="fa-solid fa-route"></i> 
             My All Files </a>
-        <a href="">
-            <i class="fa-solid fa-route"></i> 
-            File Track</a>
-
+      
     
 
         <div class="menu-title">Account</div>
-        <a href="{% url 'logout' %}">
+        <a href="{% url 'userlogout' %}">
             <i class="fa-solid fa-right-from-bracket">
                 
             </i> Logout</a>

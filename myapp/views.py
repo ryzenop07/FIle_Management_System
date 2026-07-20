@@ -3,6 +3,7 @@ from .models import *
 from django.contrib import messages
 from datetime import datetime
 from django.db.models import Q
+from django.utils import timezone
 
 
 # Create your views here.
@@ -16,7 +17,7 @@ def loginsave(request):
     if request.method=="POST":
         username=request.POST.get('username')
         password=request.POST.get('password')
-        user=adminlogin.objects.filter(username=username,password=password).first()
+        user=login.objects.filter(username=username,password=password).first()
         if user:
             request.session['adminid']=username
             return redirect('dashboard')
@@ -31,8 +32,16 @@ def adminlayout(request):
     return render(request,'admin/adminlayout.html')
 
 def logout(request):
-    request.session.flush()
+    if 'adminid' in request.session:
+        del request.session['adminid']
+    
     return redirect('adminlogin')
+
+def userlogout(request):
+    if 'userid' in request.session:
+        del request.session['userid']
+    
+    return redirect('userlogin')
 
 def adddep(request):
     return render(request,'admin/adddep.html')
@@ -45,11 +54,17 @@ def dep_save(request):
         status=request.POST.get('status')
         department_email=request.POST.get('department_email')
         department_number=request.POST.get('department_number')
-        create_at=datetime.now()
-        ab=adddepartment(department_name=department_name,department_code=department_code,department_head=department_head,status=status,department_email=department_email,department_number=department_number,create_at=create_at)
-        ab.save()
-        messages.success(request,'Add Deparment Succeeesfully')
-        return redirect('adddep')
+        create_at=timezone.now
+        
+        av=adddepartment.objects.filter(department_name=department_name,department_code=department_code,department_email=department_email)
+        if av.exists():
+            messages.error(request, "This Department already exists")
+            return redirect('adddep')
+        else:
+            ab=adddepartment(department_name=department_name,department_code=department_code,department_head=department_head,status=status,department_email=department_email,department_number=department_number,create_at=create_at)
+            ab.save()
+            messages.success(request,'Add Deparment Succeeesfully')
+            return redirect('adddep')
         
 def depshow(request):
     ab=adddepartment.objects.all()
@@ -63,25 +78,35 @@ def empadd(request):
         return redirect('adminlogin')
     else:
         if request.method == "POST":
-            
-            Empadd.objects.create(
+            username=request.POST.get('username')
+            empid=request.POST.get('empid')
+            password=request.POST.get('password')
+            sv=login(username=username, password=password)
+            sv.save()
+            av=Empadd.objects.filter(username=username, emp_id=empid)
+            if av.exists():
+                messages.error(request, "This Employee already exists")
+                return redirect('empadd')
+            else:
+                Empadd.objects.create(
+                    name=request.POST.get('name'),
+                    username=request.POST.get('username'),
+                    email=request.POST.get('email'),
+                    mobile=request.POST.get('mobile'),
+                    emp_id=request.POST.get('emp_id'),
+                    department=request.POST.get('department'),
+                    designation=request.POST.get('designation'),
+                    role=request.POST.get('role'),
+                    status=request.POST.get('status'),
+                    password=request.POST.get('password'),
+                    photo=request.FILES.get('photo'),
+                    address=request.POST.get('address'),
+                )
+                messages.success(request, 'Add Employee Succeeesfully')
                 
-                name=request.POST.get('name'),
-                username=request.POST.get('username'),
-                email=request.POST.get('email'),
-                mobile=request.POST.get('mobile'),
-                emp_id=request.POST.get('emp_id'),
-                department=request.POST.get('department'),
-                designation=request.POST.get('designation'),
-                role=request.POST.get('role'),
-                status=request.POST.get('status'),
-                password=request.POST.get('password'),
-                photo=request.FILES.get('photo'),
-                address=request.POST.get('address'),
-            )
-            return redirect('empshow')
-        ab = adddepartment.objects.all()
-        return render(request, 'admin/empadd.html', {'ab': ab})
+                
+            return redirect('empadd')
+        return render(request, 'admin/empadd.html')
 
 def empshow(request):
     ab=Empadd.objects.all()
@@ -107,6 +132,7 @@ def userlogcode(request):
                 request.session['userid']=username
                 return redirect('userdashboard')
             else:
+                
                 return redirect('home')
             
     return redirect('userlogin')
@@ -118,7 +144,7 @@ def userlayout(request):
 def createfile(request):
     userid=request.session.get('adminid')
     dp=adddepartment.objects.all()
-    em=Empadd.objects.all()
+    em=login.objects.all()
     
     if request.method=="POST":
         Fileupload.objects.create(
@@ -133,6 +159,7 @@ def createfile(request):
             create_at=datetime.now(),
             status="Forwarded"
         )
+        messages.success(request,"File Created Succesfully")
         return redirect('createfile')
     
     con={
@@ -143,9 +170,7 @@ def createfile(request):
 
 def recievedfile(request):
     sid=request.session.get('adminid')
-    ab=Fileupload.objects.filter(
-        Q(create_user=sid) | Q(current_user=sid)
-    )
+    ab=Fileupload.objects.filter(create_user=sid)
     return render(request, 'admin/recievedfile.html',{'ab':ab})
 
 
@@ -185,3 +210,29 @@ def us_recievedfile(request):
         Q(create_user=sid) | Q(current_user=sid)
     )
     return render(request, 'user/us_recievedfile.html',{'ab':ab})
+
+
+
+def sentfile(request):
+    sid=request.session.get('userid')
+    ab=Fileupload.objects.filter(create_user=sid)
+    return render(request, 'admin/sentfile.html', {'ab':ab})
+
+def allfile(request):
+    sid=request.session.get('adminid')
+    ab=Fileupload.objects.filter(
+        Q(create_user=sid) | Q(current_user=sid)
+    )
+    return render(request,'admin/allfile.html',{'ab':ab})
+
+def us_sentfile(request):
+    sid=request.session.get('userid')
+    ab=Fileupload.objects.filter(create_user=sid)
+    return render(request, 'user/us_sentfile.html', {'ab':ab})
+
+def us_allfile(request):
+    sid=request.session.get('userid')
+    ab=Fileupload.objects.filter(
+        Q(create_user=sid) | Q(current_user=sid)
+    )
+    return render(request,'user/us_allfile.html',{'ab':ab})

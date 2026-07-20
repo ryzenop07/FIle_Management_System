@@ -30,7 +30,15 @@
             <td>{{i.file_no}}</td>
             <td>{{i.subject}}</td>
             <td>{{i.create_user}}</td>
-            <td>{{i.file}}</td>
+            <td>
+                {% if i.file %}
+                <a href="{{i.file.url}}" class="text-dark">Click Here</a>
+
+            {% else %}
+            <p>File Not Show</p>
+            {% endif %}
+            </td>
+
             <td>{{i.current_user}}</td>
             <td>{{i.status}}</td>
             <td>{{i.create_at}}</td>

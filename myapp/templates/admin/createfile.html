@@ -1,5 +1,18 @@
 {% extends 'admin/adminlayout.html' %}
 {% block admin %}
+{% for mess in messages %}
+<div class="alert alert-success" role="alert">
+  {{mess}}
+</div>
+{% endfor %}
+
+
+
+
+
+
+
+
 <style>
 
 .section-card{
@@ -97,7 +110,7 @@
 
          <div class="row">
            <div class="col-lg-6 mb-4">
-            <label class="form-label">Current User</label>
+            <label class="form-label">Move / Assign To </label>
 
             <select name="current_user" class="form-select">
               <option value="">-- Select User --</option>

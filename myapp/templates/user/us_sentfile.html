@@ -4,7 +4,7 @@
 
 
 <div>
-    <h4 style="font-weight: 900;">Recieved File</h4>
+    <h4 style="font-weight: 900;">Sent File</h4>
 </div>
 
 <div>
@@ -22,7 +22,6 @@
             <th>Current User</th>
             <th>Status</th>
             <th>Date</th>
-            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -31,11 +30,16 @@
             <td>{{i.file_no}}</td>
             <td>{{i.subject}}</td>
             <td>{{i.create_user}}</td>
-            <td>{{i.file}}</td>
+            <td>{% if i.file %}
+                <a href="{{i.file.url}}" class="text-dark">Click Here</a>
+
+            {% else %}
+            <p>File Not Show</p>
+            {% endif %}
+            </td>
             <td>{{i.current_user}}</td>
             <td>{{i.status}}</td>
             <td>{{i.create_at}}</td>
-            <td><button>Open</button></td>
            
         </tr>
         {% endfor %}
@@ -67,4 +71,4 @@
 
 
 
- {% endblock user %}
+ {% endblock %}

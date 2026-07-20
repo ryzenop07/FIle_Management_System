@@ -21,4 +21,10 @@ urlpatterns = [
     path('recievedfile', recievedfile, name='recievedfile'),
     path('us_createfile', us_createfile, name='us_createfile'),
     path('us_recievedfile', us_recievedfile, name='us_recievedfile'),
+    path('sentfile', sentfile, name='sentfile'),
+    path('allfile', allfile, name='allfile'),
+    path('us_sentfile', us_sentfile, name='us_sentfile'),
+    path('us_allfile', us_allfile, name='us_allfile'),
+    path('userlogout', userlogout, name='userlogout'),
+    
 ]
