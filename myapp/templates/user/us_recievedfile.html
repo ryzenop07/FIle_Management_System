@@ -35,7 +35,7 @@
             <td>{{i.current_user}}</td>
             <td>{{i.status}}</td>
             <td>{{i.create_at}}</td>
-            <td><button>Open</button></td>
+            <td><a href="{% url 'details_file' i.file_no %}"><button>Open</button></a></td>
            
         </tr>
         {% endfor %}

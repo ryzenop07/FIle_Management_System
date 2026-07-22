@@ -26,5 +26,7 @@ urlpatterns = [
     path('us_sentfile', us_sentfile, name='us_sentfile'),
     path('us_allfile', us_allfile, name='us_allfile'),
     path('userlogout', userlogout, name='userlogout'),
+    path('details_file/<str:file_no>/',details_file, name='details_file'),
+    
     
 ]

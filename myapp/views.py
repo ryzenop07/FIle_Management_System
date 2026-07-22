@@ -4,12 +4,14 @@ from django.contrib import messages
 from datetime import datetime
 from django.db.models import Q
 from django.utils import timezone
+from django.views.decorators.cache import cache_control
 
 
 # Create your views here.
 def home(request):
     return render(request,'user/home.html')
 
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def Adminlogin(request):
     return render(request,'admin/adminlogin.html')
 
@@ -25,6 +27,7 @@ def loginsave(request):
             messages.error(request,'Invalid username or password')
             return redirect('adminlogin')
 
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def dashboard(request):
     return render(request,'admin/dashboard.html')
 
@@ -206,9 +209,7 @@ def us_createfile(request):
     
 def us_recievedfile(request):
     sid=request.session.get('userid')
-    ab=Fileupload.objects.filter(
-        Q(create_user=sid) | Q(current_user=sid)
-    )
+    ab=Fileupload.objects.filter(current_user=sid)
     return render(request, 'user/us_recievedfile.html',{'ab':ab})
 
 
@@ -236,3 +237,12 @@ def us_allfile(request):
         Q(create_user=sid) | Q(current_user=sid)
     )
     return render(request,'user/us_allfile.html',{'ab':ab})
+
+def details_file(request,file_no):
+    ur=login.objects.all()
+    ab=Fileupload.objects.get(file_no=file_no)
+    context={
+        'ab':ab,
+        'ur':ur
+    }
+    return render(request,'user/details_file.html',context)

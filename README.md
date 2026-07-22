@@ -4,19 +4,12 @@
 
 ### A role-based file tracking & management web application built with Django
 
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Coming_Soon-orange?style=for-the-badge)](https://github.com/ryzenop07/FIle_Management_System)
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/ryzenop07/FIle_Management_System)
-[![Commits](https://img.shields.io/badge/Total_Commits-7-blue?style=for-the-badge&logo=git)](https://github.com/ryzenop07/FIle_Management_System/commits/main)
+[![Commits](https://img.shields.io/badge/Total_Commits-8-blue?style=for-the-badge&logo=git)](https://github.com/ryzenop07/FIle_Management_System/commits/main)
 [![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge&logo=python)](https://python.org)
 [![Django](https://img.shields.io/badge/Django-4.x-092E20?style=for-the-badge&logo=django)](https://djangoproject.com)
 
 </div>
-
----
-
-## 🚀 Live Demo
-
-> 🔗 **Live Link:** _Will be updated after deployment_
 
 ---
 
@@ -36,9 +29,12 @@
 | 📄 File Upload & Tracking | Upload files with priority, assign to departments/users |
 | 🔄 File Forwarding | Track file movement between users with status updates |
 | 📥 Received Files | View files received by admin and users |
+| 📤 Sent Files | View files sent by admin and users |
+| 📂 All Files View | View all files (sent + received) in one place |
 | 👤 User Dashboard | Separate portal for employees to manage their files |
 | 📝 User Create File | Users can create and submit files from their portal |
 | 📬 User Received Files | Users can view files received in their portal |
+| 🔍 File Details | View complete file details (in progress) |
 | 🖼️ Profile Photos | Employee photo upload support |
 
 ---
@@ -46,7 +42,7 @@
 ## 🛠️ Tech Stack
 
 - **Backend:** Python, Django
-- **Frontend:** HTML, CSS, Bootstrap
+- **Frontend:** HTML, CSS, Bootstrap 5, Font Awesome
 - **Database:** SQLite3
 - **Auth:** Django Session-based Authentication
 
@@ -58,7 +54,7 @@
 fms/
 ├── fms/                  # Django project settings
 ├── myapp/
-│   ├── models.py         # DB models: Admin, Department, Employee, File
+│   ├── models.py         # DB models: login, adddepartment, Empadd, Fileupload
 │   ├── views.py          # All business logic & request handling
 │   ├── urls.py           # URL routing
 │   └── templates/
@@ -73,10 +69,35 @@ fms/
 
 ## 🗄️ Database Models
 
-- **adminlogin** — Admin credentials
+- **login** — Admin & user credentials
 - **adddepartment** — Department info (name, code, head, email, contact)
 - **Empadd** — Employee records (name, role, department, designation, photo)
-- **Fileupload** — File records (file no, subject, priority, department, status)
+- **Fileupload** — File records (file no, subject, priority, department, status, current_user)
+
+---
+
+## 🔗 URL Routes
+
+| URL | View | Description |
+|---|---|---|
+| `/` | home | Landing page |
+| `/adminlogin` | Adminlogin | Admin login page |
+| `/dashboard` | dashboard | Admin dashboard |
+| `/adddep` | adddep | Add department |
+| `/depshow` | depshow | List departments |
+| `/empadd` | empadd | Add employee |
+| `/empshow` | empshow | List employees |
+| `/createfile` | createfile | Admin create file |
+| `/recievedfile` | recievedfile | Admin received files |
+| `/sentfile` | sentfile | Admin sent files |
+| `/allfile` | allfile | Admin all files |
+| `/userlogin` | Userlogin | User login page |
+| `/userdashboard` | userdashboard | User dashboard |
+| `/us_createfile` | us_createfile | User create file |
+| `/us_recievedfile` | us_recievedfile | User received files |
+| `/us_sentfile` | us_sentfile | User sent files |
+| `/us_allfile` | us_allfile | User all files |
+| `/details_file/<file_no>/` | details_file | File details (in progress) |
 
 ---
 
@@ -104,6 +125,10 @@ Visit: `http://127.0.0.1:8000`
 - [x] User create file from user portal
 - [x] User received files view
 - [x] Admin received files view
+- [x] Sent files view (admin & user)
+- [x] All files view (admin & user)
+- [x] URL routing for file details page
+- [ ] File details page (in progress)
 - [ ] File forwarding history/timeline
 - [ ] Email notifications
 - [ ] Deployment (Live link coming soon)
