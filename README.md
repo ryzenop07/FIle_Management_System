@@ -5,7 +5,7 @@
 ### A role-based file tracking & management web application built with Django
 
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/ryzenop07/FIle_Management_System)
-[![Commits](https://img.shields.io/badge/Total_Commits-8-blue?style=for-the-badge&logo=git)](https://github.com/ryzenop07/FIle_Management_System/commits/main)
+[![Commits](https://img.shields.io/badge/Total_Commits-9-blue?style=for-the-badge&logo=git)](https://github.com/ryzenop07/FIle_Management_System/commits/main)
 [![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge&logo=python)](https://python.org)
 [![Django](https://img.shields.io/badge/Django-4.x-092E20?style=for-the-badge&logo=django)](https://djangoproject.com)
 
@@ -34,7 +34,9 @@
 | 👤 User Dashboard | Separate portal for employees to manage their files |
 | 📝 User Create File | Users can create and submit files from their portal |
 | 📬 User Received Files | Users can view files received in their portal |
-| 🔍 File Details | View complete file details (in progress) |
+| 🔍 File Details | View complete file info — subject, priority, department, attachment, status |
+| 📜 File Movement History | Table view of all forwarding actions with from/to user, remark & date |
+| ⚡ File Action Panel | Forward file to another user with action type and remark |
 | 🖼️ Profile Photos | Employee photo upload support |
 
 ---
@@ -73,6 +75,7 @@ fms/
 - **adddepartment** — Department info (name, code, head, email, contact)
 - **Empadd** — Employee records (name, role, department, designation, photo)
 - **Fileupload** — File records (file no, subject, priority, department, status, current_user)
+- **File_history** — File movement log (file no, from user, to user, action, remark, timestamp)
 
 ---
 
@@ -128,8 +131,11 @@ Visit: `http://127.0.0.1:8000`
 - [x] Sent files view (admin & user)
 - [x] All files view (admin & user)
 - [x] URL routing for file details page
-- [ ] File details page (in progress)
-- [ ] File forwarding history/timeline
+- [x] File details page — full info table with priority, department, attachment
+- [x] File movement history — table view with from/to user, action, remark, date
+- [x] File action panel — forward file with action type and remark
+- [x] File_history model & migration
+- [ ] File forwarding history/timeline (visual)
 - [ ] Email notifications
 - [ ] Deployment (Live link coming soon)
 

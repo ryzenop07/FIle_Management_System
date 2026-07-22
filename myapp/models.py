@@ -44,6 +44,15 @@ class Fileupload(models.Model):
     status=models.CharField(max_length=200)
     create_at=models.TimeField()
 
+class File_history(models.Model):
+    id=models.IntegerField(primary_key=True,auto_created=True)
+    File_no=models.CharField(max_length=100)
+    current_user=models.CharField(max_length=225)
+    forwarded_user=models.CharField(max_length=225)
+    action=models.CharField(max_length=225)
+    remark=models.CharField(max)
+    create_at=models.DateTimeField()
+    
     
     
     

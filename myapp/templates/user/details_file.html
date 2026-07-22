@@ -1,0 +1,114 @@
+{% extends 'user/userlayout.html' %}
+{% block user %}
+
+<div>
+    <h4 style="font-weight: 900;">File Details - {{ab.file_no}}</h4>
+</div>
+<div>
+    <p>View file information, movement history and take action</p>
+</div>
+
+<div class="row">
+    <div class="col-sm-9">
+
+        <table class="table table-bordered">
+            <tr><th>File No</th><td>{{ab.file_no}}</td></tr>
+            <tr><th>Subject</th><td>{{ab.subject}}</td></tr>
+            <tr><th>Create User</th><td>{{ab.create_user}}</td></tr>
+            <tr><th>Current User</th><td>{{ab.current_user}}</td></tr>
+            <tr><th>Department</th><td>{{ab.department}}</td></tr>
+            <tr><th>Priority</th><td>{{ab.priority}}</td></tr>
+            <tr><th>Description</th><td>{{ab.description}}</td></tr>
+            <tr>
+                <th>Attachment</th>
+                <td>
+                    {% if ab.file %}
+                        <a href="{{ab.file.url}}" class="text-dark">Click Here</a>
+                    {% else %}
+                        File Not Available
+                    {% endif %}
+                </td>
+            </tr>
+            <tr><th>Status</th><td><span class="badge bg-success">{{ab.status}}</span></td></tr>
+            <tr><th>Date</th><td>{{ab.create_at}}</td></tr>
+        </table>
+
+        <div>
+            <h4 style="font-weight: 900;">File Movement History</h4>
+        </div>
+        <div>
+            <p>Track all movements and actions taken on this file</p>
+        </div>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>File No</th>
+                    <th>From User</th>
+                    <th>To User</th>
+                    <th>Action</th>
+                    <th>Remark</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in fileh %}
+                <tr>
+                    <td>{{i.File_no}}</td>
+                    <td>{{i.current_user}}</td>
+                    <td>{{i.forwarded_user}}</td>
+                    <td><span class="badge bg-success">{{i.action}}</span></td>
+                    <td>{{i.remark}}</td>
+                    <td>{{i.create_at}}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="6" class="text-center">No movement history found</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="col-sm-3">
+        <div>
+            <h4 style="font-weight: 900;">File Action</h4>
+        </div>
+        <div>
+            <p>Forward or update the status of this file</p>
+        </div>
+
+        <form method="post" class="table table-bordered p-3">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">Current User</label>
+                <input type="text" name="current_user" value="{{ab.current_user}}" class="form-control" readonly>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Move / Action</label>
+                <select name="action" class="form-control">
+                    <option value="">--Select--</option>
+                    <option>forwarded</option>
+                    <option>approve</option>
+                    <option>reject</option>
+                    <option>close</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Forward To</label>
+                <select name="forwarded_user" class="form-control">
+                    <option value="">--Select User--</option>
+                    {% for i in ur %}
+                    <option value="{{i.username}}">{{i.username}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Remark</label>
+                <textarea name="remark" class="form-control" rows="3"></textarea>
+            </div>
+            <button class="btn btn-success w-100">Move File</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

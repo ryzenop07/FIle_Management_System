@@ -239,10 +239,29 @@ def us_allfile(request):
     return render(request,'user/us_allfile.html',{'ab':ab})
 
 def details_file(request,file_no):
+    sn=request.session.get('userid')
     ur=login.objects.all()
+    fileh=File_history.objects.all()
     ab=Fileupload.objects.get(file_no=file_no)
+    if request.method=="POST":
+        current_user=request.POST.get('current_user')
+        action=request.POST.get('action')
+        forwarded_user=request.POST.get('forwarded_user')
+        remark=request.POST.get('remark')
+        create_at=timezone.now()
+        ab.current_user=forwarded_user
+        ab.status=action
+        ab.save()
+        fh=File_history(File_no=ab.file_no,current_user=sn,action=action,forwarded_user=forwarded_user,remark=remark,create_at=create_at)
+        fh.save()
+        return redirect('us_recievedfile')
+        
     context={
         'ab':ab,
-        'ur':ur
+        'ur':ur,
+        'fileh':fileh
     }
     return render(request,'user/details_file.html',context)
+
+
+        
