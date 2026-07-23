@@ -1,5 +1,5 @@
-{% extends 'user/userlayout.html' %}
-{% block user %}
+{% extends 'admin/adminlayout.html' %}
+{% block admin %}
 
 <div>
     <h4 style="font-weight: 900;">File Details - {{ab.file_no}}</h4>
@@ -70,14 +70,13 @@
     </div>
 
     <div class="col-sm-3">
-       
         <div>
             <h4 style="font-weight: 900;">File Action</h4>
         </div>
         <div>
             <p>Forward or update the status of this file</p>
         </div>
-{% if ab.status != "close" %}
+
         <form method="post" class="table table-bordered p-3">
             {% csrf_token %}
             <div class="mb-3">
@@ -109,18 +108,7 @@
             </div>
             <button class="btn btn-success w-100">Move File</button>
         </form>
-        {% else %}
-        <div class="alert alert-warning" role="alert">This File IS Closed</div>
-        {% endif %}
     </div>
 </div>
 
 {% endblock %}
-
-
-
-
-
-<div class="col-sm-3 mt-5">
-
-</div>

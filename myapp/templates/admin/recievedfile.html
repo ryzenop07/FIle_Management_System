@@ -22,6 +22,7 @@
             <th>Current User</th>
             <th>Status</th>
             <th>Date</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -42,6 +43,7 @@
             <td>{{i.current_user}}</td>
             <td>{{i.status}}</td>
             <td>{{i.create_at}}</td>
+            <td><a href="{% url 'ad_details_file' i.file_no %}"><button>Open</button></a></td>
            
         </tr>
         {% endfor %}

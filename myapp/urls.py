@@ -27,6 +27,7 @@ urlpatterns = [
     path('us_allfile', us_allfile, name='us_allfile'),
     path('userlogout', userlogout, name='userlogout'),
     path('details_file/<str:file_no>/',details_file, name='details_file'),
+    path('ad_details_file/<str:file_no>/',ad_details_file, name='ad_details_file'),
     
     
 ]
